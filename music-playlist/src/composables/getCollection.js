@@ -1,6 +1,6 @@
 import { ref, watchEffect } from "vue";
 import { projectFirestore } from "../firebase/config";
-
+//Test
 const getCollection = (collection) => {
   const documents = ref(null);
   const error = ref(null);
