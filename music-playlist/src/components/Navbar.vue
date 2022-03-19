@@ -77,6 +77,6 @@ button {
 }
 .user-links p {
   font-family: "Nunito", sans-serif;
-  color: white;
+  color: #7c8bff;
 }
 </style>
