@@ -46,8 +46,8 @@ export default {
 .navbar {
   padding: 16px 10px;
   margin-bottom: 60px;
-  background: #ff71ce;
-  border-bottom: 2px solid #fe33db;
+  background: #ffc2e2;
+  border-bottom: 2px solid #7c8bff;
 }
 nav {
   display: flex;
@@ -68,7 +68,7 @@ nav .links a,
 button {
   margin-left: 16px;
   font-size: 14px;
-  border: 2px solid var(--primary);
+  border: 2px solid #7c8bff;
 }
 .user-links {
   display: flex;
