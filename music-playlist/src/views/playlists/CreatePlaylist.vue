@@ -11,7 +11,7 @@
     />
 
     <h4>Upload A Cover Image For Your Playlist</h4>
-    <input type="file" required />
+    <input type="file" required @change="handleChange" />
     <div class="error">{{ fileError }}</div>
     <button v-if="!isPending">Create</button>
     <button v-else disabled>Saving...</button>
@@ -27,7 +27,7 @@ import { timestamp } from "@/firebase/config";
 export default {
   name: "CreatePlaylist",
   setup(props, context) {
-    // Refs set to form input fields
+    // Refs set to form input fields and other UI states
     const title = ref("");
     const description = ref("");
     const file = ref(null);
@@ -40,9 +40,32 @@ export default {
 
     // Function that handles form submissions
     const handleSubmit = () => {
-      console.log(title.value, description.value);
+      if (file.value) {
+        console.log(title.value, description.value, file.value);
+      }
     };
-    return { handleSubmit, title, description, fileError, isPending };
+
+    // Allowed File types
+    const types = ["image/png", "image/jpeg"];
+    // Function that handles file uploads
+    const handleChange = (e) => {
+      let selected = e.target.files[0];
+      if (selected && types.includes(selected.type)) {
+        file.value = selected;
+        fileError.value = null;
+      } else {
+        file.value = null;
+        fileError.value = "Please select an image file (png or jpg format)";
+      }
+    };
+    return {
+      handleSubmit,
+      title,
+      description,
+      fileError,
+      isPending,
+      handleChange,
+    };
   },
 };
 </script>
