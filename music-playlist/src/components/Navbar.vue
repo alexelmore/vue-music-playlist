@@ -46,7 +46,8 @@ export default {
 .navbar {
   padding: 16px 10px;
   margin-bottom: 60px;
-  background: white;
+  background: #ff71ce;
+  border-bottom: 2px solid #fe33db;
 }
 nav {
   display: flex;
@@ -55,7 +56,7 @@ nav {
   margin: 0 auto;
 }
 nav img {
-  max-height: 60px;
+  max-height: 80px;
 }
 nav h1 {
   margin-left: 20px;
@@ -76,6 +77,6 @@ button {
 }
 .user-links p {
   font-family: "Nunito", sans-serif;
-  color: var(--primary);
+  color: white;
 }
 </style>

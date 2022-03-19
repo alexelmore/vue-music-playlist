@@ -13,10 +13,10 @@
   margin: 0;
   padding: 0;
   font-family: "Nunito", sans-serif;
-  color: var(--primary);
+  color: #fffb96;
 }
 body {
-  background: #fafafa;
+  background: #05ffa1;
 }
 a {
   text-decoration: none;
@@ -25,18 +25,19 @@ a {
 /* buttons */
 button,
 .btn {
-  background: var(--secondary);
+  background: #fffb96;
   border-radius: 8px;
-  border: 0;
+  border: 2px solid var(--primary);
   padding: 8px 12px;
   font-weight: 600;
   cursor: pointer;
   display: inline-block;
+  color: rgb(22, 21, 21);
 }
 button:hover,
 .btn:hover {
-  background: var(--primary);
-  color: white;
+  color: var(--primary);
+  background: white;
 }
 button:disabled {
   opacity: 0.5;
@@ -65,6 +66,12 @@ textarea {
   width: 100%;
   box-sizing: border-box;
   margin: 20px auto;
+}
+label,
+input,
+h4,
+p {
+  color: #4f515a;
 }
 
 /* error text */
