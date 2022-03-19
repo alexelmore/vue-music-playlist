@@ -70,10 +70,6 @@ export default {
 };
 </script>
 <style>
-form {
-  background: white;
-  border: 2px solid #7c8bff !important;
-}
 input[type="file"] {
   border: 0;
   padding: 0;

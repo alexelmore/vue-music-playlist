@@ -1,6 +1,8 @@
 /* custom font */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
 /* variables */
 :root {
   --primary: #4f515a;
@@ -12,8 +14,8 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Nunito", sans-serif;
-  color: #7c8bff;
+  font-family: "Audiowide", cursive;
+  color: #5f01c3;
 }
 body {
   background: #95fff7;
@@ -27,7 +29,9 @@ button,
 .btn {
   background: #f4fdb1;
   border-radius: 8px;
-  border: 2px solid #7c8bff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   padding: 8px 12px;
   font-weight: 600;
   cursor: pointer;
@@ -52,7 +56,9 @@ form {
   margin: 0 auto;
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   border: 1px solid var(--secondary);
   background: white;
 }

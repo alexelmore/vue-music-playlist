@@ -47,7 +47,9 @@ export default {
   padding: 16px 10px;
   margin-bottom: 60px;
   background: #ffc2e2;
-  border-bottom: 2px solid #7c8bff;
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
+    rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px,
+    rgba(240, 46, 170, 0.05) 25px 25px;
 }
 nav {
   display: flex;
@@ -56,10 +58,11 @@ nav {
   margin: 0 auto;
 }
 nav img {
-  max-height: 80px;
+  max-height: 120px;
 }
 nav h1 {
   margin-left: 20px;
+  text-shadow: 0px 3px 3px #4caf50;
 }
 nav .links {
   margin-left: auto;
@@ -68,7 +71,6 @@ nav .links a,
 button {
   margin-left: 16px;
   font-size: 14px;
-  border: 2px solid #7c8bff;
 }
 .user-links {
   display: flex;
