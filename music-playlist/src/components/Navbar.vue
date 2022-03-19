@@ -2,9 +2,12 @@
   <div class="navbar">
     <nav>
       <img src="@/assets/rockmusic.png" />
-      <h1><router-link :to="{ name: 'home' }">Vue Music List</router-link></h1>
+      <h1>
+        <router-link :to="{ name: 'home' }">Vue Music PlayList</router-link>
+      </h1>
       <div class="links">
-        <div v-if="user">
+        <div v-if="user" class="user-links">
+          <p>Rock On, {{ user.displayName }}!</p>
           <button @click="handleClick">Logout</button>
         </div>
         <div v-else>
@@ -64,5 +67,15 @@ nav .links a,
 button {
   margin-left: 16px;
   font-size: 14px;
+  border: 2px solid var(--primary);
+}
+.user-links {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+.user-links p {
+  font-family: "Nunito", sans-serif;
+  color: var(--primary);
 }
 </style>
