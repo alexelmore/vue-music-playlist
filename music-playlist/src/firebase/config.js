@@ -1,15 +1,15 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-
+import "firebase/storage"
 // Firestore config object
 const firebaseConfig = {
-  apiKey: "AIzaSyCKo1g1jaoxIEZ_FoIpFtwquu7Zj9nR2sM",
-  authDomain: "vue-mymusic-list.firebaseapp.com",
-  projectId: "vue-mymusic-list",
-  storageBucket: "vue-mymusic-list.appspot.com",
-  messagingSenderId: "904061668042",
-  appId: "1:904061668042:web:93e20ddcb2caa8636f0233",
+  apiKey: "AIzaSyDp-YogMvWox_Nkiu0yc0c4vdEkixe_Q-I",
+  authDomain: "vue-playlist-606fc.firebaseapp.com",
+  projectId: "vue-playlist-606fc",
+  storageBucket: "vue-playlist-606fc.appspot.com",
+  messagingSenderId: "1074744334737",
+  appId: "1:1074744334737:web:a5d8ebd9c1fb68fe4aa230"
 };
 
 // Init firebase
@@ -21,7 +21,9 @@ const projectAuth = firebase.auth();
 // Init firestore service
 const projectFirestore = firebase.firestore();
 
+const projectStorage = firebase.storage()
+
 // Init timestamp
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export { projectFirestore, timestamp, projectAuth };
+export { projectFirestore, timestamp, projectAuth, projectStorage };

@@ -1,74 +1,75 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-    <h4>Add A New Playlist!</h4>
+  <div>
+    <form @submit.prevent="handleSubmit">
+      <h4>Create a New Playlist</h4>
+      <input type="text" required placeholder="Playlist title" v-model="title">
+      <textarea required placeholder="Playlist description..." v-model="description"></textarea>
+      <!-- upload playlist image -->
+      <label>Upload Playlist Cover Image</label>
+      <input type="file" @change="handleChange">
+      <div class="error">{{ fileError }}</div>
 
-    <input type="text" placeholder="Playlist Title" required v-model="title" />
-
-    <textarea
-      required
-      placeholder="Playlist Description"
-      v-model="description"
-    />
-
-    <h4>Upload A Cover Image For Your Playlist</h4>
-    <input type="file" required @change="handleChange" />
-    <div class="error">{{ fileError }}</div>
-    <button v-if="!isPending">Create</button>
-    <button v-else disabled>Saving...</button>
-  </form>
+      <button v-if="!isPending">Create</button>
+      <button v-else disabled>Saving...</button>
+    </form>
+  </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import useCollection from "@/composables/useCollection";
-import getUser from "@/composables/getUser";
-import { timestamp } from "@/firebase/config";
-
+import { ref } from 'vue'
+import useStorage from '@/composables/useStorage'
+import useCollection from '@/composables/useCollection'
+import getUser from '@/composables/getUser'
+import { timestamp } from '@/firebase/config'
 export default {
-  name: "CreatePlaylist",
-  setup(props, context) {
-    // Refs set to form input fields and other UI states
-    const title = ref("");
-    const description = ref("");
-    const file = ref(null);
-    const fileError = ref(null);
-    const isPending = ref(false);
-
-    // Pull out properties from useCollection and getUser composables
-    const { error, addDoc } = useCollection("playlists");
-    const { user } = getUser();
-
-    // Function that handles form submissions
-    const handleSubmit = () => {
+  setup() {
+    const { filePath, url, uploadImage } = useStorage()
+    const { error, addDoc } = useCollection('playlists')
+    const { user } = getUser()
+    const title = ref('')
+    const description = ref('')
+    const file = ref(null)
+    const fileError = ref(null)
+    const isPending = ref(false)
+    const handleSubmit = async () => {
       if (file.value) {
-        console.log(title.value, description.value, file.value);
+        isPending.value = true
+        await uploadImage(file.value)
+        await addDoc({
+          title: title.value,
+          description: description.value,
+          userId: user.value.uid,
+          userName: user.value.displayName,
+          coverUrl: url.value,
+          filePath: filePath.value, // so we can delete it later
+          songs: [],
+          createdAt: timestamp()
+        })
+        isPending.value = false
+        if (!error.value) {
+          console.log('playlist added')
+        }
       }
-    };
-
-    // Allowed File types
-    const types = ["image/png", "image/jpeg"];
-    // Function that handles file uploads
+    }
+    // allowed file types
+    const types = ['image/png', 'image/jpeg']
     const handleChange = (e) => {
-      let selected = e.target.files[0];
+      let selected = e.target.files[0]
+      console.log(selected)
       if (selected && types.includes(selected.type)) {
-        file.value = selected;
-        fileError.value = null;
+        file.value = selected
+        fileError.value = null
       } else {
-        file.value = null;
-        fileError.value = "Please select an image file (png or jpg format)";
+        file.value = null
+        fileError.value = 'Please select an image file (png or jpg)'
       }
-    };
-    return {
-      handleSubmit,
-      title,
-      description,
-      fileError,
-      isPending,
-      handleChange,
-    };
-  },
-};
+    }
+    
+    return { title, description, handleSubmit, fileError, handleChange, isPending }
+  }
+}
 </script>
+
 <style>
 input[type="file"] {
   border: 0;
