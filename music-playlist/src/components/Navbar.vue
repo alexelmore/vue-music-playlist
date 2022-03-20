@@ -47,7 +47,7 @@ export default {
   padding: 16px 10px;
   margin-bottom: 60px;
   background: #ffc2e2;
-  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(46, 240, 120, 0.3) 10px 10px,
     rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px,
     rgba(240, 46, 170, 0.05) 25px 25px;
 }
@@ -63,6 +63,7 @@ nav img {
 nav h1 {
   margin-left: 20px;
   text-shadow: 0px 3px 3px #4caf50;
+  font-size: 1.5rem;
 }
 nav .links {
   margin-left: auto;
@@ -78,7 +79,8 @@ button {
   width: fit-content;
 }
 .user-links p {
-  font-family: "Nunito", sans-serif;
-  color: #7c8bff;
+  font-family: "Audiowide", cursive;
+  color: #5f01c3;
+  text-shadow: 0px 3px 3px #4caf50;
 }
 </style>

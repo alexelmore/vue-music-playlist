@@ -1,5 +1,6 @@
 {
     "diffEditor.wordWrap": "on",
     "editor.wordWrap": "on",
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "window.autoDetectColorScheme": true
 }
