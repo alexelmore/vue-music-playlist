@@ -4,11 +4,7 @@
 
     <input type="text" placeholder="Playlist Title" required v-model="title" />
 
-    <textarea
-      required
-      placeholder="Playlist Description"
-      v-model="description"
-    />
+    <textarea required placeholder="Playlist Description" v-model="description" />
 
     <h4>Upload A Cover Image For Your Playlist</h4>
     <input type="file" required @change="handleChange" />
@@ -22,11 +18,17 @@
 import { ref } from "vue";
 import useCollection from "@/composables/useCollection";
 import getUser from "@/composables/getUser";
+import useStorage from "../../composables/useStorage";
 import { timestamp } from "@/firebase/config";
 
 export default {
   name: "CreatePlaylist",
   setup(props, context) {
+    // Pull out properties from useCollection, getUser and useStorage composables
+    const { error, addDoc } = useCollection("playlists");
+    const { user } = getUser();
+    const { url, filePath, uploadImage } = useStorage();
+
     // Refs set to form input fields and other UI states
     const title = ref("");
     const description = ref("");
@@ -34,14 +36,11 @@ export default {
     const fileError = ref(null);
     const isPending = ref(false);
 
-    // Pull out properties from useCollection and getUser composables
-    const { error, addDoc } = useCollection("playlists");
-    const { user } = getUser();
-
     // Function that handles form submissions
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
       if (file.value) {
-        console.log(title.value, description.value, file.value);
+        await uploadImage(file.value);
+        console.log("Image uploaded, url:", url.value);
       }
     };
 
