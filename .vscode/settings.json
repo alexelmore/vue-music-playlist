@@ -1,6 +1,9 @@
 {
     "diffEditor.wordWrap": "on",
     "editor.wordWrap": "on",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "window.autoDetectColorScheme": true
+    "editor.defaultFormatter": "Wscats.vue",
+    "window.autoDetectColorScheme": true,
+    "[vue]": {
+        "editor.defaultFormatter": "Wscats.vue"
+    }
 }
