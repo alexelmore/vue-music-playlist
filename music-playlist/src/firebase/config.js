@@ -5,12 +5,12 @@ import 'firebase/storage'
 
 // Firestore config object
 const firebaseConfig = {
-  apiKey: "AIzaSyCKo1g1jaoxIEZ_FoIpFtwquu7Zj9nR2sM",
-  authDomain: "vue-mymusic-list.firebaseapp.com",
-  projectId: "vue-mymusic-list",
-  storageBucket: "vue-mymusic-list.appspot.com",
-  messagingSenderId: "904061668042",
-  appId: "1:904061668042:web:93e20ddcb2caa8636f0233",
+  apiKey: "AIzaSyBO4E0hBD5E-YnkNH991NuAdpuJsfQ3S-A",
+  authDomain: "vue-playlist-92640.firebaseapp.com",
+  projectId: "vue-playlist-92640",
+  storageBucket: "vue-playlist-92640.appspot.com",
+  messagingSenderId: "862870966318",
+  appId: "1:862870966318:web:7467f84c28667b78e50fbf"
 };
 
 // Init firebase
