@@ -7,7 +7,7 @@
       </h1>
       <div class="links">
         <div v-if="user" class="user-links">
-          <p>Rock On, {{ user.displayName }}!</p>
+             <router-link  :to="{ name: 'createPlaylist' }">Create A New Playlist</router-link>
           <button @click="handleClick">Logout</button>
         </div>
         <div v-else>
@@ -78,9 +78,14 @@ button {
   align-items: center;
   width: fit-content;
 }
-.user-links p {
+.user-links a {
   font-family: "Audiowide", cursive;
   color: #5f01c3;
-  text-shadow: 0px 3px 3px #4caf50;
+  text-shadow: 0px 1.5px 1.5px #4caf50; 
 }
+nav a:hover,.user-links a:hover {
+ color: var(--primary);
+  background: white;
+}
+
 </style>
