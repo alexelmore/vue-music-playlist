@@ -1,14 +1,25 @@
 <template>
   <div class="home">
-    <p>home page</p>
+    <div v-if="error" class="error">Could not fetch the data</div>
+    <div v-if="documents">
+      <ListView :playlists="documents" />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import getCollection from "../composables/getCollection";
+import ListView from "../components/ListView.vue";
 export default {
   name: "HomeView",
-  components: {},
+  components: { ListView },
+  setup() {
+    const { documents, error } = getCollection("playlists");
+    return {
+      documents,
+      error,
+    };
+  },
 };
 </script>

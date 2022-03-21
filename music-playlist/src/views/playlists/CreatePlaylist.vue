@@ -27,18 +27,25 @@ import getUser from "@/composables/getUser";
 import { timestamp } from "@/firebase/config";
 export default {
   setup() {
+    // Init and pull out properties from our composables: useStorage, useCollection and getUser
     const { filePath, url, uploadImage } = useStorage();
     const { error, addDoc } = useCollection("playlists");
     const { user } = getUser();
+    // Init refs and assign them to our file inputs, our pending state and our error states
     const title = ref("");
     const description = ref("");
     const file = ref(null);
     const fileError = ref(null);
     const isPending = ref(false);
+    // Function that handles form submission
     const handleSubmit = async () => {
+      // Check to see if a file has been uploaded first
       if (file.value) {
+        // Reset isPending to true
         isPending.value = true;
+        // Call uploadImage function and pass it our file value
         await uploadImage(file.value);
+        // Call addDoc function and pass it our title value, description value, user id value, userName value, coverUrl value, filePath value, songs array and createdAt timestamp
         await addDoc({
           title: title.value,
           description: description.value,
@@ -49,17 +56,18 @@ export default {
           songs: [],
           createdAt: timestamp(),
         });
+        // Set isPending to false
         isPending.value = false;
         if (!error.value) {
           console.log("playlist added");
         }
       }
     };
-    // allowed file types
+    // allowed file upload types
     const types = ["image/png", "image/jpeg"];
+    // Function that handles changes to our file upload input
     const handleChange = (e) => {
       let selected = e.target.files[0];
-      console.log(selected);
       if (selected && types.includes(selected.type)) {
         file.value = selected;
         fileError.value = null;
