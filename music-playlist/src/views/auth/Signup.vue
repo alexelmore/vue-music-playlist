@@ -16,16 +16,22 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import useSignup from "../../composables/useSignup";
 export default {
   name: "SignupForm",
   setup(props, context) {
     // Pull out error, isPending and signup function from useSignup
     const { error, signup, isPending } = useSignup();
+
     // Refs binded to form input fields
     const displayName = ref("");
     const email = ref("");
     const password = ref("");
+
+    // Init router
+    const router = useRouter();
+
     // Asyn function to handle form submissions and to signup the user
     const handleSubmit = async () => {
       // Await the signup function
@@ -33,6 +39,7 @@ export default {
       // Check if there is not a value for error, if no error, emit a custom event, notifiying the parent component that a user has signed up
       if (!error.value) {
         context.emit("signup");
+        router.push({ name: "home" });
       }
     };
     return { displayName, email, password, handleSubmit, error, isPending };
