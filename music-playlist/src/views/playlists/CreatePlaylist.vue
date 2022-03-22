@@ -70,7 +70,7 @@ export default {
         // Set isPending to false
         isPending.value = false;
         if (!error.value) {
-          console.log("playlist added");
+          // Redirect user to PlaylistDetails component after adding a playlist
           router.push({ name: "playlistDetails", params: { id: res.id } });
         }
       }
