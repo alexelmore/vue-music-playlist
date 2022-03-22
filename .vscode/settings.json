@@ -1,9 +1,10 @@
 {
     "diffEditor.wordWrap": "on",
     "editor.wordWrap": "on",
-    "editor.defaultFormatter": "Wscats.vue",
+    "editor.defaultFormatter": "octref.vetur",
     "window.autoDetectColorScheme": true,
     "[vue]": {
-        "editor.defaultFormatter": "Wscats.vue"
-    }
+        "editor.defaultFormatter": "svipas.prettier-plus"
+    },
+    "editor.formatOnSave": true
 }

@@ -2,17 +2,23 @@ import { ref } from "vue";
 import { projectFirestore } from "@/firebase/config";
 
 const useCollection = (collection) => {
-  // Set error to a default value of null
-  const error = ref(null);
+ // Set error and isPending to refs with an initial value of null and false
+const error = ref(null);
+const isPending = ref(false);
   // Function that takes in a doc as an argument and then adds it to the collection
   const addDoc = async (doc) => {
-    error.value = null;
+   // Reset error and isPending values to their default
+   error.value = null;
+   isPending.value = true;
     try {
-      await projectFirestore.collection(collection).add(doc);
+      const res = await projectFirestore.collection(collection).add(doc);
+      isPending.value = false
+      return res
     } catch (err) {
       error.value = err.message;
+      isPending.value = false
     }
   };
-  return { error, addDoc };
+  return { error, addDoc,isPending };
 };
 export default useCollection;

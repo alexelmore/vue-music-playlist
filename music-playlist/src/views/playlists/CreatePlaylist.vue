@@ -2,7 +2,12 @@
   <div>
     <form @submit.prevent="handleSubmit">
       <h4>Create a New Playlist</h4>
-      <input type="text" required placeholder="Playlist title" v-model="title" />
+      <input
+        type="text"
+        required
+        placeholder="Playlist title"
+        v-model="title"
+      />
       <textarea
         required
         placeholder="Playlist description..."
@@ -24,6 +29,7 @@ import { ref } from "vue";
 import useStorage from "@/composables/useStorage";
 import useCollection from "@/composables/useCollection";
 import getUser from "@/composables/getUser";
+import { useRouter } from "vue-router";
 import { timestamp } from "@/firebase/config";
 export default {
   setup() {
@@ -31,12 +37,17 @@ export default {
     const { filePath, url, uploadImage } = useStorage();
     const { error, addDoc } = useCollection("playlists");
     const { user } = getUser();
+
     // Init refs and assign them to our file inputs, our pending state and our error states
     const title = ref("");
     const description = ref("");
     const file = ref(null);
     const fileError = ref(null);
     const isPending = ref(false);
+
+    // Init router
+    const router = useRouter();
+
     // Function that handles form submission
     const handleSubmit = async () => {
       // Check to see if a file has been uploaded first
@@ -46,7 +57,7 @@ export default {
         // Call uploadImage function and pass it our file value
         await uploadImage(file.value);
         // Call addDoc function and pass it our title value, description value, user id value, userName value, coverUrl value, filePath value, songs array and createdAt timestamp
-        await addDoc({
+        const res = await addDoc({
           title: title.value,
           description: description.value,
           userId: user.value.uid,
@@ -60,6 +71,7 @@ export default {
         isPending.value = false;
         if (!error.value) {
           console.log("playlist added");
+          router.push({ name: "playlistDetails", params: { id: res.id } });
         }
       }
     };
@@ -77,7 +89,14 @@ export default {
       }
     };
 
-    return { title, description, handleSubmit, fileError, handleChange, isPending };
+    return {
+      title,
+      description,
+      handleSubmit,
+      fileError,
+      handleChange,
+      isPending,
+    };
   },
 };
 </script>
