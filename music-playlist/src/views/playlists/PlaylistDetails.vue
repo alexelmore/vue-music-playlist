@@ -1,28 +1,30 @@
 <template>
-  <div class="error" v-if="error">{{ error }}</div>
-  <div class="playlist-details" v-if="playlist">
-    <div class="playlist-info">
-      <div class="cover">
-        <img :src="playlist.coverUrl" />
-      </div>
-      <h2>{{ playlist.title }}</h2>
-      <p class="username">Created by {{ playlist.userName }}</p>
-      <p class="description">{{ playlist.description }}</p>
-      <button v-if="ownership" @click="handleDelete">Delete Playlist</button>
-    </div>
-    <!-- song list -->
-    <div class="song-list">
-      <div v-if="!playlist.songs.length">
-        <i>{{ playlist.title }}</i> is currently empty.
-      </div>
-      <div v-for="song in playlist.songs" :key="song.id" class="single-song">
-        <div class="details">
-          <h3>{{ song.title }}</h3>
-          <p>{{ song.artist }}</p>
+  <div>
+    <div class="error" v-if="error">{{ error }}</div>
+    <div class="playlist-details" v-if="playlist">
+      <div class="playlist-info">
+        <div class="cover">
+          <img :src="playlist.coverUrl" />
         </div>
-        <button v-if="ownership" @click="handleClick(song.id)">delete</button>
+        <h2>{{ playlist.title }}</h2>
+        <p class="username">Created by {{ playlist.userName }}</p>
+        <p class="description">{{ playlist.description }}</p>
+        <button v-if="ownership" @click="handleDelete">Delete Playlist</button>
       </div>
-      <AddSong :playlist="playlist" />
+      <!-- song list -->
+      <div class="song-list">
+        <div v-if="!playlist.songs.length">
+          <i>{{ playlist.title }}</i> is currently empty.
+        </div>
+        <div v-for="song in playlist.songs" :key="song.id" class="single-song">
+          <div class="details">
+            <h3>{{ song.title }}</h3>
+            <p>{{ song.artist }}</p>
+          </div>
+          <button v-if="ownership" @click="handleClick(song.id)">delete</button>
+        </div>
+        <AddSong :playlist="playlist" />
+      </div>
     </div>
   </div>
 </template>
