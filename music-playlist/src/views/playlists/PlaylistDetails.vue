@@ -12,7 +12,17 @@
     </div>
     <!-- song list -->
     <div class="song-list">
-      <p>song list here</p>
+      <div v-if="!playlist.songs.length">
+        <i>{{ playlist.title }}</i> is currently empty.
+      </div>
+      <div v-for="song in playlist.songs" :key="song.id" class="single-song">
+        <div class="details">
+          <h3>{{ song.title }}</h3>
+          <p>{{ song.artist }}</p>
+        </div>
+        <button v-if="ownership" @click="handleClick(song.id)">delete</button>
+      </div>
+      <AddSong :playlist="playlist" />
     </div>
   </div>
 </template>
@@ -22,15 +32,20 @@ import getDocument from "../../composables/getDocument";
 import getUser from "../../composables/getUser";
 import useDocument from "../../composables/useDocument";
 import useStorage from "../../composables/useStorage";
+import AddSong from "../../components/AddSong.vue";
 import { useRouter } from "vue-router";
 import { computed } from "vue";
 export default {
   name: "PlaylistDetails",
   props: ["id"],
+  components: { AddSong },
   setup(props) {
     // Init and pull the necessary properties from our getDocument, useDocument, getUser and useStorage composables
     const { document: playlist, error } = getDocument("playlists", props.id);
-    const { deleteDocument } = useDocument("playlists", props.id);
+    const { deleteDocument, updateDocument } = useDocument(
+      "playlists",
+      props.id
+    );
     const { user } = getUser();
     const { deleteImage } = useStorage();
 
@@ -53,11 +68,17 @@ export default {
       router.push({ name: "home" });
     };
 
+    const handleClick = async (id) => {
+      const songs = playlist.value.songs.filter((song) => song.id != id);
+      await updateDocument({ songs });
+    };
+
     return {
       ownership,
       error,
       playlist,
       handleDelete,
+      handleClick,
     };
   },
 };

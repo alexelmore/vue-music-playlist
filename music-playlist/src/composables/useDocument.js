@@ -24,7 +24,24 @@ const useDocument = (collection, id) => {
       error.value = "Could not delete the document"
     }
   };
-  return { deleteDocument, isPending, error };
+
+  // Function that sends an update request to Firebase
+  const updateDocument = async (updates)=>{
+    // Reset is isPending and error values
+    isPending.value = true;
+    error.value = null;
+    try{
+      const response = await docRef.update(updates)
+      isPending.value = false
+      return response
+    }catch(err){
+      console.log(err.message)
+      isPending.value = false
+      error.value = 'Could not update the document'
+    }
+  }
+
+  return { updateDocument, deleteDocument, isPending, error };
 };
 
 export default useDocument;
