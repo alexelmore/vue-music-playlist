@@ -1,28 +1,54 @@
 <template>
   <div class="error" v-if="error">{{ error }}</div>
-  <p>{{ selectedList }}</p>
+  <div class="playlist-details" v-if="playlist">
+    <div class="playlist-info">
+      <div class="cover">
+        <img :src="playlist.coverUrl" />
+      </div>
+      <h2>{{ playlist.title }}</h2>
+      <p class="username">Created by {{ playlist.userName }}</p>
+      <p class="description">{{ playlist.description }}</p>
+      <button v-if="ownership" @click="handleDelete">Delete Playlist</button>
+    </div>
+    <!-- song list -->
+    <div class="song-list">
+      <p>song list here</p>
+    </div>
+  </div>
 </template>
 
 <script>
-import getCollection from "../../composables/getCollection";
-
+import getDocument from "../../composables/getDocument";
 import { computed } from "vue";
+import getUser from "@/composables/getUser";
 export default {
   name: "PlaylistDetails",
   props: ["id"],
   setup(props) {
-    const { documents, error } = getCollection("playlists");
-    console.log("d", documents);
-    const selectedList = computed(() => {
-      if (documents.value) {
-        return documents.value.filter((doc) => doc.id === props.id);
-      }
+    // Init and pull out playlist and error properties from our getDocument composable
+    const { document: playlist, error } = getDocument("playlists", props.id);
+
+    // Init and pull out user property from our getUser composable
+    const { user } = getUser();
+
+    // Computed property to check if playlist was created by current logged in user
+    const ownership = computed(() => {
+      return (
+        playlist.value && user.value && user.value.uid == playlist.value.userId
+      );
     });
 
+    // Function that handles deleting a playlist
+    const handleDelete = async () => {
+      //  await deleteDoc();
+      console.log("fired delete");
+    };
+
     return {
-      documents,
+      ownership,
       error,
-      selectedList,
+      playlist,
+      handleDelete,
     };
   },
 };
