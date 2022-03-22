@@ -19,17 +19,25 @@
 
 <script>
 import getDocument from "../../composables/getDocument";
+import getUser from "../../composables/getUser";
+import useDocument from "../../composables/useDocument";
+import useStorage from "../../composables/useStorage";
+import { useRouter } from "vue-router";
 import { computed } from "vue";
-import getUser from "@/composables/getUser";
 export default {
   name: "PlaylistDetails",
   props: ["id"],
   setup(props) {
-    // Init and pull out playlist and error properties from our getDocument composable
+    // Init and pull the necessary properties from our getDocument, useDocument, getUser and useStorage composables
     const { document: playlist, error } = getDocument("playlists", props.id);
-
-    // Init and pull out user property from our getUser composable
+    const { deleteDocument } = useDocument("playlists", props.id);
     const { user } = getUser();
+    const { deleteImage } = useStorage();
+
+    // Init router
+    const router = useRouter();
+
+    error.value = null;
 
     // Computed property to check if playlist was created by current logged in user
     const ownership = computed(() => {
@@ -40,8 +48,9 @@ export default {
 
     // Function that handles deleting a playlist
     const handleDelete = async () => {
-      //  await deleteDoc();
-      console.log("fired delete");
+      await deleteImage(playlist.value.filePath);
+      await deleteDocument();
+      router.push({ name: "home" });
     };
 
     return {

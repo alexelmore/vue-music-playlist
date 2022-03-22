@@ -24,6 +24,7 @@ export default {
     // Refs binded to form input fields
     const email = ref("");
     const password = ref("");
+
     // Init router
     const router = useRouter();
 
