@@ -39,7 +39,7 @@ export default {
       // Check if there is not a value for error, if no error, emit a custom event, notifiying the parent component that a user has signed up
       if (!error.value) {
         context.emit("signup");
-        router.push({ name: "home" });
+        router.push({ name: "userPlaylists" });
       }
     };
     return { displayName, email, password, handleSubmit, error, isPending };

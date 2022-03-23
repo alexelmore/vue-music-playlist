@@ -38,7 +38,7 @@ export default {
       await login(email.value, password.value);
       // Check if there is not a value for error, if no error, emit a custom event, notifiying the parent component that a user has logged in
       if (!error.value) {
-        router.push({ name: "home" });
+        router.push({ name: "userPlaylists" });
       }
     };
     return { email, password, handleSubmit, error, isPending };
