@@ -5,6 +5,9 @@
     <div v-if="playlist">
       <ListView :playlists="playlist" />
     </div>
+    <router-link :to="{ name: 'createPlaylist' }" class="btn"
+      >Create a New Playlist</router-link
+    >
   </div>
 </template>
 
@@ -12,9 +15,6 @@
 import getCollection from "../../composables/getCollection";
 import ListView from "../../components/ListView.vue";
 import getUser from "../../composables/getUser";
-// import useDocument from "../../composables/useDocument";
-// import useStorage from "../../composables/useStorage";
-// import { computed } from "vue";
 
 export default {
   name: "UserPlaylists",
@@ -28,6 +28,7 @@ export default {
       "==",
       user.value.uid,
     ]);
+
     return {
       playlist,
       error,
@@ -36,4 +37,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+h2 {
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--secondary);
+}
+.btn {
+  margin-top: 20px;
+}
+</style>
