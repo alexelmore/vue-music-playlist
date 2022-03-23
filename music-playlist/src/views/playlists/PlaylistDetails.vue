@@ -16,14 +16,29 @@
         <div v-if="!playlist.songs.length">
           <i>{{ playlist.title }}</i> is currently empty.
         </div>
-        <div v-for="song in playlist.songs" :key="song.id" class="single-song">
-          <div class="details">
-            <h3>{{ song.title }}</h3>
-            <p>{{ song.artist }}</p>
+        <div v-else>
+          <h2 class="song-list-header">Track Listing</h2>
+          <div
+            v-for="(song, index) in playlist.songs"
+            :key="song.id"
+            class="single-song"
+          >
+            <div class="details">
+              <h3>
+                <span class="song-list-number">{{ index + 1 }}.</span>
+                {{ song.title }}
+              </h3>
+              <p>
+                {{ song.artist }}
+              </p>
+            </div>
+            <button v-if="ownership" @click="handleClick(song.id)">
+              delete
+            </button>
           </div>
-          <button v-if="ownership" @click="handleClick(song.id)">delete</button>
         </div>
-        <AddSong :playlist="playlist" />
+
+        <AddSong :playlist="playlist" v-if="ownership" />
       </div>
     </div>
   </div>
@@ -98,6 +113,17 @@ export default {
   position: relative;
   padding: 160px;
 }
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.5rem;
+}
+.details p {
+  padding-left: 1rem;
+  font-style: italic;
+}
 .cover img {
   display: block;
   position: absolute;
@@ -107,6 +133,13 @@ export default {
   min-height: 100%;
   max-width: 200%;
   max-height: 200%;
+}
+.song-list-header {
+  color: #4f515a;
+  text-decoration: underline;
+}
+.song-list-number {
+  color: #4f515a;
 }
 .playlist-info {
   text-align: center;

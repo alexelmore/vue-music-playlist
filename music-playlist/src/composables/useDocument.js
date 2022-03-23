@@ -6,7 +6,7 @@ const useDocument = (collection, id) => {
   const error = ref(null);
   const isPending = ref(false);
 
-  // Make a reference to our document that we want to delete
+  // Make a reference to the document that we want edit
   let docRef = projectFirestore.collection(collection).doc(id)
 
   // Function that sends a delete request to Firebase
@@ -27,7 +27,7 @@ const useDocument = (collection, id) => {
 
   // Function that sends an update request to Firebase
   const updateDocument = async (updates)=>{
-    // Reset is isPending and error values
+    // Reset the isPending and the error values
     isPending.value = true;
     error.value = null;
     try{

@@ -2,7 +2,7 @@
   <div class="add-song">
     <button v-if="!showForm" @click="showForm = true">Add Songs</button>
     <form v-if="showForm" @submit.prevent="handleSubmit">
-      <h4>Add A New Song To {{ playlist.title }}</h4>
+      <h4>Add A New Song To "{{ playlist.title }}" playlist</h4>
       <input type="text" placeholder="Song title" required v-model="title" />
       <input type="text" placeholder="Artist" required v-model="artist" />
       <button>Add Song</button>
@@ -22,7 +22,7 @@ export default {
     const artist = ref("");
     const showForm = ref(false);
 
-    // Init and pull the deleteDocument function from our useDocument composable
+    // Init and pull the updateDocument function from our useDocument composable
     const { updateDocument } = useDocument("playlists", props.playlist.id);
 
     // Function that handles adding a new song to a playlist
@@ -33,7 +33,7 @@ export default {
         artist: artist.value,
         id: Math.floor(Math.random() * 1000000),
       };
-      // Store the call to the updateDoc function in a constant called res, passing the updateDoc function an object with our current songs spread out and our newSong object
+      // Store the call to the updateDocument function in a constant called res, passing the updateDocument function an object with our current songs spread out and our newSong object
       const res = await updateDocument({
         songs: [...props.playlist.songs, newSong],
       });
