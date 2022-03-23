@@ -13,6 +13,7 @@
           <router-link :to="{ name: 'userPlaylists' }"
             >My Playlists</router-link
           >
+          <span>Greetings, {{ user.displayName }}</span>
           <button @click="handleClick">Logout</button>
         </div>
         <div v-else>
@@ -92,5 +93,15 @@ nav a:hover,
 .user-links a:hover {
   color: var(--primary);
   background: white;
+}
+
+span {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid #5f01c3;
+  color: #5f01c3;
+  text-shadow: 0px 1.5px 1.5px #4caf50;
 }
 </style>

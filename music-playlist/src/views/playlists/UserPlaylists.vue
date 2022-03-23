@@ -5,6 +5,7 @@
     <div v-if="playlist">
       <ListView :playlists="playlist" />
     </div>
+    <div v-if="!playlist.length"><h4>No Playlists...</h4></div>
     <router-link :to="{ name: 'createPlaylist' }" class="btn"
       >Create a New Playlist</router-link
     >
@@ -41,9 +42,16 @@ export default {
 h2 {
   padding-bottom: 10px;
   margin-bottom: 30px;
-  border-bottom: 1px solid var(--secondary);
+  text-align: center;
+}
+h4 {
+  text-align: center;
+  margin-bottom: 30px;
 }
 .btn {
   margin-top: 20px;
+  display: flex;
+  width: fit-content;
+  margin: auto;
 }
 </style>
